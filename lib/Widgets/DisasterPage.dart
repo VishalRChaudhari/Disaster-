@@ -1,4 +1,4 @@
-import 'package:disastermanagement/Widgets/WeatherCard.dart';
+import 'package:disastermanagement/Widgets/weatherCard.dart';
 import 'package:flutter/material.dart';
 
 class DisasterPage extends StatefulWidget {

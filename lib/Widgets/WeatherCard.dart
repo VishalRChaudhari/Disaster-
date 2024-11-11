@@ -10,7 +10,7 @@ class WeatherCard extends StatefulWidget {
 }
 
 class _WeatherCardState extends State<WeatherCard> {
-  final WeatherFactory _wf = WeatherFactory(WEATHER_API_KEY);
+  final WeatherFactory _wf = WeatherFactory(weatherApiKey);
   Weather? _weather;
 
   @override

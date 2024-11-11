@@ -17,11 +17,11 @@ class _HelpCard extends State<HelpCard> {
     Contacts? contact;
 
     Future<void> _launchUrl() async {
-      final Uri _url = Uri.parse(contact!.url);
-      if (await canLaunchUrl(_url)) {
-        await launchUrl(_url);
+      final Uri url = Uri.parse(contact!.url);
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url);
       } else {
-        throw 'Could not launch $_url';
+        throw 'Could not launch $url';
       }
     }
 
@@ -34,8 +34,7 @@ class _HelpCard extends State<HelpCard> {
             Container(
               width: double.infinity,
               child: Card(
-                elevation: 10,
-                color: const Color.fromARGB(255, 145, 249, 148),
+                elevation: 5,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(

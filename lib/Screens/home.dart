@@ -1,4 +1,6 @@
 import 'package:disastermanagement/Screens/NotificationsScreen.dart';
+import 'package:disastermanagement/Screens/register_page.dart';
+import 'package:disastermanagement/Screens/map_screen.dart';
 import 'package:disastermanagement/Widgets/DisasterPage.dart';
 import 'package:disastermanagement/Widgets/helplineCard.dart';
 import 'package:disastermanagement/Widgets/profile.dart';
@@ -14,22 +16,37 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   var currentIndex = 0;
+  
   @override
   Widget build(BuildContext context) {
+    
     String title = 'Sanjeevani';
     Widget? content;
     if (currentIndex == 0) {
       content = const Center(child: DisasterPage());
     }
-
     if (currentIndex == 1) {
+      //helpline contacts list
+      title = 'Location Details';
+      content = const Center(
+        child: Mapscreen(),
+      );
+    }
+    if (currentIndex == 2) {
+      //helpline contacts list
+      title = 'Register Disaster';
+      content = const Center(
+        child: RegisterPage(),
+      );
+    }
+    if (currentIndex == 3) {
       //helpline contacts list
       title = 'Helpline Contact ';
       content = const Center(
         child: HelpCard(),
       );
     }
-    if (currentIndex == 2) {
+    if (currentIndex == 4) {
       title = 'Profile';
       //profile content
       content = const Center(
@@ -38,11 +55,9 @@ class _HomePage extends State<HomePage> {
     }
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 239, 255, 239),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 145, 249, 148),
         title: Text(title),
-        elevation: 1,
+        elevation: 50,
         actions: [
           if (currentIndex == 0)
             IconButton(
@@ -58,11 +73,11 @@ class _HomePage extends State<HomePage> {
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
                 },
-                icon: Icon(Icons.logout))
+                icon: const Icon(Icons.logout))
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 145, 249, 148),
+        fixedColor: Colors.black,
         onTap: (value) {
           setState(() {
             currentIndex = value;
@@ -82,7 +97,14 @@ class _HomePage extends State<HomePage> {
               Icons.location_on,
               color: Color.fromARGB(255, 1, 57, 3),
             ),
-            label: 'Helpline',
+            label: 'Location',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.add,
+              color: Color.fromARGB(255, 1, 57, 3),
+            ),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(

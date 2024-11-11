@@ -27,7 +27,69 @@ class _WeatherCardState extends State<WeatherCard> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return SizedBox(
+      height: 150,
+      width: double.infinity,
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, top: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //city name
+              Text(
+                _weather == null ? 'Loading...' : "${_weather?.areaName}",
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 28,
+                ),
+              ),
+              const SizedBox(
+                height: 13,
+              ),
+              //sky
+
+              //temperature
+              Row(
+                children: [
+                  const Text('Temperature : '),
+                  Text(
+                    _weather == null
+                        ? ' - - '
+                        : '${_weather?.temperature?.celsius?.toStringAsFixed(1)}° C',
+                  ),
+                ],
+              ),
+
+              //humidity
+              Row(
+                children: [
+                  const Text(
+                    'Humidity : ',
+                  ),
+                  Text("${_weather?.humidity}"),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
+
+
+
+
+
+
+  
+
+/*
+  SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
@@ -37,15 +99,13 @@ class _WeatherCardState extends State<WeatherCard> {
         ],
       ),
     );
-  }
+
 
   Widget _conditionCard() {
     return SizedBox(
       height: 160,
       width: 140,
       child: Card(
-        elevation: 10,
-        color:  const Color.fromARGB(255, 145, 249, 148),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,7 +157,6 @@ class _WeatherCardState extends State<WeatherCard> {
       width: 140,
       child: Card(
         elevation: 10,
-        color:  const Color.fromARGB(255, 145, 249, 148),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -138,7 +197,7 @@ class _WeatherCardState extends State<WeatherCard> {
       width: 140,
       child: Card(
         elevation: 10,
-        color:  const Color.fromARGB(255, 145, 249, 148),
+        color: const Color.fromARGB(255, 145, 249, 148),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -163,4 +222,5 @@ class _WeatherCardState extends State<WeatherCard> {
       ),
     );
   }
+  */
 }

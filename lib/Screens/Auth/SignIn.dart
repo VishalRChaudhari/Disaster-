@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disastermanagement/Screens/Auth/login.dart';
 import 'package:disastermanagement/Screens/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+final _Firebase = FirebaseAuth.instance;
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -17,6 +22,7 @@ class _SignInState extends State<SignIn> {
   String _password = '';
   DateTime _dob = DateTime.now();
   String _homeAddress = '';
+  var _isAuthenticating = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,19 +41,42 @@ class _SignInState extends State<SignIn> {
     }
 
     // Submit Form Method
-    void _submitForm() {
-      if (_formKey.currentState!.validate()) {
-        _formKey.currentState!.save();
-        // Perform sign-in action here with the collected data
-        print('Username: $_username');
-        print('Email: $_email');
-        print('Password: $_password');
-        print('Date of Birth: $_dob');
-        print('Home Address: $_homeAddress');
-
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (ctx) => HomePage()));
+    void _submitForm() async {
+      final _isValid = _formKey.currentState!.validate();
+      if (!_isValid ) {
+        return;
       }
+      _formKey.currentState!.save();
+      try {
+        setState(() {
+          _isAuthenticating = true;
+        });
+        // ignore: unused_local_variable
+
+        final userCredentials = await _Firebase.createUserWithEmailAndPassword(
+            email: _email, password: _password);
+
+        FirebaseFirestore.instance
+            .collection('Users')
+            .doc(userCredentials.user!.uid)
+            .set({
+          'UserName': _username,
+          'Email Address': _email,
+        });
+      } on FirebaseAuthException catch (error) {
+        if (error.code == 'email-already-in-use') {}
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error.message ?? 'Authentication Failed. '),
+          ),
+        );
+        setState(() {
+          _isAuthenticating = false;
+        });
+      }
+
+      
     }
 
     return Scaffold(

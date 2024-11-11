@@ -2,6 +2,7 @@ import 'package:disastermanagement/Screens/NotificationsScreen.dart';
 import 'package:disastermanagement/Widgets/DisasterPage.dart';
 import 'package:disastermanagement/Widgets/helplineCard.dart';
 import 'package:disastermanagement/Widgets/profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -39,9 +40,8 @@ class _HomePage extends State<HomePage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 239, 255, 239),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 94, 220, 98),
+        backgroundColor: const Color.fromARGB(255, 145, 249, 148),
         title: Text(title),
-        centerTitle: true,
         elevation: 1,
         actions: [
           if (currentIndex == 0)
@@ -53,10 +53,16 @@ class _HomePage extends State<HomePage> {
               },
               icon: const Icon(Icons.notifications_outlined),
             ),
+          if (currentIndex == 2)
+            IconButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                },
+                icon: Icon(Icons.logout))
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 94, 220, 98),
+        backgroundColor: const Color.fromARGB(255, 145, 249, 148),
         onTap: (value) {
           setState(() {
             currentIndex = value;
@@ -70,6 +76,13 @@ class _HomePage extends State<HomePage> {
               color: Color.fromARGB(255, 1, 57, 3),
             ),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.location_on,
+              color: Color.fromARGB(255, 1, 57, 3),
+            ),
+            label: 'Helpline',
           ),
           BottomNavigationBarItem(
             icon: Icon(

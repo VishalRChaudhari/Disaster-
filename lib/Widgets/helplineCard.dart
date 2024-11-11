@@ -35,7 +35,7 @@ class _HelpCard extends State<HelpCard> {
               width: double.infinity,
               child: Card(
                 elevation: 10,
-                color: const Color.fromARGB(255, 197, 241, 199),
+                color: const Color.fromARGB(255, 145, 249, 148),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(

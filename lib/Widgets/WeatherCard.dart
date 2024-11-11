@@ -45,7 +45,7 @@ class _WeatherCardState extends State<WeatherCard> {
       width: 140,
       child: Card(
         elevation: 10,
-        color: const Color.fromARGB(255, 197, 241, 199),
+        color:  const Color.fromARGB(255, 145, 249, 148),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,7 +97,7 @@ class _WeatherCardState extends State<WeatherCard> {
       width: 140,
       child: Card(
         elevation: 10,
-        color: const Color.fromARGB(255, 197, 241, 199),
+        color:  const Color.fromARGB(255, 145, 249, 148),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -138,7 +138,7 @@ class _WeatherCardState extends State<WeatherCard> {
       width: 140,
       child: Card(
         elevation: 10,
-        color: const Color.fromARGB(255, 197, 241, 199),
+        color:  const Color.fromARGB(255, 145, 249, 148),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

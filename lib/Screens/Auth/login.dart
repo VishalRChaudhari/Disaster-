@@ -1,5 +1,10 @@
+import 'package:disastermanagement/Screens/Auth/SignIn.dart';
+import 'package:disastermanagement/Screens/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+final _Firebase = FirebaseAuth.instance;
 
 class LogIN extends StatefulWidget {
   const LogIN({super.key});
@@ -15,13 +20,18 @@ class _LogINState extends State<LogIN> {
 
   @override
   Widget build(BuildContext context) {
-    void _submitForm() {
-      if (_formKey.currentState!.validate()) {
-        _formKey.currentState!.save();
-        // Perform log-in action here with the collected data
-        print('Email: $_email');
-        print('Password: $_password');
+    void _submitForm() async {
+      final _isValid = _formKey.currentState!.validate();
+      if (!_isValid) {
+        return;
       }
+      _formKey.currentState!.save();
+
+      final userCredentials = await _Firebase.signInWithEmailAndPassword(
+          email: _email, password: _password);
+      // Perform log-in action here with the collected data
+      
+      
     }
 
     return Scaffold(
@@ -37,7 +47,7 @@ class _LogINState extends State<LogIN> {
               children: [
                 // Email Field
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Email'),
+                  decoration: const InputDecoration(labelText: 'Email'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
@@ -54,7 +64,7 @@ class _LogINState extends State<LogIN> {
 
                 // Password Field
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Password'),
+                  decoration: const InputDecoration(labelText: 'Password'),
                   obscureText: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -73,7 +83,7 @@ class _LogINState extends State<LogIN> {
                   child: CupertinoButton(
                     color: Colors.blue,
                     onPressed: _submitForm,
-                    child: Text('Log In'),
+                    child: const Text('Log In'),
                   ),
                 ),
 
@@ -81,9 +91,11 @@ class _LogINState extends State<LogIN> {
                 TextButton(
                   onPressed: () {
                     // Navigate to Sign-Up page or perform some action
-                    print('Navigate to Sign-Up Page');
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SignIn(),
+                    ));
                   },
-                  child: Text('Don’t have an account? Sign Up'),
+                  child: const Text('Don’t have an account? Sign Up'),
                 ),
               ],
             ),

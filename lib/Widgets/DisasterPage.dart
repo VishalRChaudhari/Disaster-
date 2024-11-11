@@ -23,7 +23,7 @@ class _DisasterPage extends State<DisasterPage> {
             height: 150,
             child: Card(            
               elevation: 10,
-              color: Color.fromARGB(255, 197, 241, 199),
+              color:  const Color.fromARGB(255, 145, 249, 148),
               child: Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Column(
@@ -49,7 +49,7 @@ class _DisasterPage extends State<DisasterPage> {
             child: TextField(
               decoration: InputDecoration(
                 filled: true,
-                fillColor: Color.fromARGB(255, 173, 248, 177),
+                fillColor: const Color.fromARGB(255, 145, 249, 148),
                 enabled: true,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(

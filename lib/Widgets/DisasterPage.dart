@@ -23,7 +23,7 @@ class _DisasterPage extends State<DisasterPage> {
             height: 150,
             child: Card(            
               elevation: 10,
-              color:  const Color.fromARGB(255, 145, 249, 148),
+              color:   Color.fromARGB(255, 145, 249, 148),
               child: Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Column(

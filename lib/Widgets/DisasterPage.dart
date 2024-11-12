@@ -1,3 +1,4 @@
+import 'package:disastermanagement/Widgets/news.dart';
 import 'package:disastermanagement/Widgets/weatherCard.dart';
 import 'package:flutter/material.dart';
 
@@ -46,9 +47,9 @@ class _DisasterPage extends State<DisasterPage> {
           //hello card
           SizedBox(
             width: double.infinity,
-            height: 120,
+            height: 110,
             child: Card(
-              elevation: 5,
+              elevation: 3,
               child: Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Column(
@@ -88,7 +89,12 @@ class _DisasterPage extends State<DisasterPage> {
               fontSize: 30,
             ),
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: News(),
+          ),
         ],
       ),
     );

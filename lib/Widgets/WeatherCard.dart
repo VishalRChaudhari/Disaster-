@@ -31,7 +31,7 @@ class _WeatherCardState extends State<WeatherCard> {
       height: 150,
       width: double.infinity,
       child: Card(
-        elevation: 5,
+        elevation: 2,
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 10),
           child: Column(
@@ -56,7 +56,7 @@ class _WeatherCardState extends State<WeatherCard> {
                   const Text('Temperature : '),
                   Text(
                     _weather == null
-                        ? ' - - '
+                        ? ' - °C '
                         : '${_weather?.temperature?.celsius?.toStringAsFixed(1)}° C',
                   ),
                 ],
@@ -68,7 +68,9 @@ class _WeatherCardState extends State<WeatherCard> {
                   const Text(
                     'Humidity : ',
                   ),
-                  Text("${_weather?.humidity}"),
+                  Text(_weather == null
+                        ? '-' :
+                    "${_weather?.humidity}" ),
                 ],
               )
             ],
@@ -86,7 +88,7 @@ class _WeatherCardState extends State<WeatherCard> {
 
 
 
-  
+
 
 /*
   SingleChildScrollView(

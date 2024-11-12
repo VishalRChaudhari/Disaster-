@@ -73,7 +73,7 @@ class _RegisterPage extends State<RegisterPage> {
                 return null;
               },
             ),
-             const SizedBox(height: 20),
+            const SizedBox(height: 20),
             DropdownButtonFormField<String>(
               value: _selectedDisasterType,
               onChanged: (value) {
@@ -82,15 +82,26 @@ class _RegisterPage extends State<RegisterPage> {
                 });
               },
               items: const [
-                DropdownMenuItem(value: 'Flood', child: Text('Flood')),
                 DropdownMenuItem(
-                    value: 'Earthquake', child: Text('Earthquake')),
-                DropdownMenuItem(value: 'Fire', child: Text('Fire')),
-                DropdownMenuItem(value: 'Tornado', child: Text('Tornado')),
+                  value: 'Flood',
+                  child: Text('Flood'),
+                ),
+                DropdownMenuItem(
+                  value: 'Earthquake',
+                  child: Text('Earthquake'),
+                ),
+                DropdownMenuItem(
+                  value: 'Fire',
+                  child: Text('Fire'),
+                ),
+                DropdownMenuItem(
+                  value: 'Tornado',
+                  child: Text('Tornado'),
+                ),
               ],
               decoration: const InputDecoration(labelText: 'Type of Disaster'),
             ),
-             const SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
                 Text(

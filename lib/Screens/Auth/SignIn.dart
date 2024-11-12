@@ -21,7 +21,8 @@ class _SignInState extends State<SignIn> {
   String _email = '';
   String _password = '';
   DateTime _dob = DateTime.now();
-  String _homeAddress = '';
+  // String _homeAddress = '';
+  var _isLogin = true;
   var _isAuthenticating = false;
 
   @override
@@ -43,26 +44,29 @@ class _SignInState extends State<SignIn> {
     // Submit Form Method
     void _submitForm() async {
       final _isValid = _formKey.currentState!.validate();
-      if (!_isValid ) {
+      if (!_isValid) {
         return;
       }
       _formKey.currentState!.save();
       try {
-        setState(() {
-          _isAuthenticating = true;
-        });
-        // ignore: unused_local_variable
+        if (_isLogin) {
+          setState(() {
+            _isAuthenticating = true;
+          });
+          // ignore: unused_local_variable
 
-        final userCredentials = await _Firebase.createUserWithEmailAndPassword(
-            email: _email, password: _password);
+          final userCredentials =
+              await _Firebase.createUserWithEmailAndPassword(
+                  email: _email, password: _password);
 
-        FirebaseFirestore.instance
-            .collection('Users')
-            .doc(userCredentials.user!.uid)
-            .set({
-          'UserName': _username,
-          'Email Address': _email,
-        });
+          FirebaseFirestore.instance
+              .collection('Users')
+              .doc(userCredentials.user!.uid)
+              .set({
+            'UserName': _username,
+            'Email Address': _email,
+          });
+        }
       } on FirebaseAuthException catch (error) {
         if (error.code == 'email-already-in-use') {}
         ScaffoldMessenger.of(context).clearSnackBars();
@@ -75,13 +79,11 @@ class _SignInState extends State<SignIn> {
           _isAuthenticating = false;
         });
       }
-
-      
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign In'),
+        title: const Text('Sign In'),
         elevation: 1.0,
       ),
       body: Center(
@@ -125,7 +127,7 @@ class _SignInState extends State<SignIn> {
 
                 // Password Field
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Password'),
+                  decoration: const InputDecoration(labelText: 'Password'),
                   obscureText: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -139,20 +141,15 @@ class _SignInState extends State<SignIn> {
                 ),
 
                 // Date of Birth Field with DatePicker
-                ListTile(
-                  title: Text("Date of Birth: ${_dob.toLocal()}".split(' ')[0]),
-                  trailing: Icon(Icons.calendar_today),
-                  onTap: _selectDate,
-                ),
 
                 // Home Address (Optional)
-                TextFormField(
+                /*TextFormField(
                   decoration:
                       InputDecoration(labelText: 'Home Address (Optional)'),
                   onSaved: (value) {
                     _homeAddress = value ?? '';
                   },
-                ),
+                ),*/
 
                 // Sign In Button (Cupertino Style)
                 Padding(
@@ -160,7 +157,7 @@ class _SignInState extends State<SignIn> {
                   child: CupertinoButton(
                     color: Colors.blue,
                     onPressed: _submitForm,
-                    child: Text('Sign In'),
+                    child: const Text('Sign In'),
                   ),
                 ),
 

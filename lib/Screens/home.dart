@@ -68,7 +68,7 @@ class _HomePage extends State<HomePage> {
               },
               icon: const Icon(Icons.notifications_outlined),
             ),
-          if (currentIndex == 2)
+          if (currentIndex == 4)
             IconButton(
                 onPressed: () {
                   FirebaseAuth.instance.signOut();

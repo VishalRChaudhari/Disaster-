@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:disastermanagement/Screens/Auth/SignIn.dart';
+import 'package:disastermanagement/Screens/Auth/auth.dart';
 import 'package:disastermanagement/Screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _SplashScreennState extends State<SplashScreenn> {
     Timer(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => HomePage()),
       );
     });
   }
@@ -58,5 +59,5 @@ Widget homeBuild = StreamBuilder(
       if (snapshot.hasData) {
         return const HomePage();
       }
-      return SignIn();
+      return const AuthScreen();
     });

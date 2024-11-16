@@ -1,4 +1,4 @@
-import 'package:disastermanagement/secrets.dart';
+import 'package:disastermanagement/sec.dart';
 import 'package:flutter/material.dart';
 import 'package:weather/weather.dart';
 

@@ -1,7 +1,7 @@
 import 'package:disastermanagement/Screens/notifications_screen.dart';
 import 'package:disastermanagement/Screens/register_page.dart';
 import 'package:disastermanagement/Screens/map_screen.dart';
-import 'package:disastermanagement/Widgets/DisasterPage.dart';
+import 'package:disastermanagement/Widgets/disaster_page.dart';
 import 'package:disastermanagement/Widgets/helplineCard.dart';
 import 'package:disastermanagement/Widgets/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';

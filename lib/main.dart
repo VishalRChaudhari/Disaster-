@@ -1,4 +1,3 @@
-import 'package:disastermanagement/Screens/map_screen.dart';
 import 'package:disastermanagement/Screens/splashsceen.dart';
 import 'package:disastermanagement/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';

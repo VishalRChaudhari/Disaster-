@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:disastermanagement/Screens/Auth/SignIn.dart';
 import 'package:disastermanagement/Screens/Auth/auth.dart';
 import 'package:disastermanagement/Screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,10 +15,10 @@ class _SplashScreennState extends State<SplashScreenn> {
   void initState() {
     super.initState();
     // Navigate to the home screen after a delay of 3 seconds
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 1), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => homeBuild),
       );
     });
   }

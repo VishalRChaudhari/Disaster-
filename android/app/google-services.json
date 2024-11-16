@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "504868507999",
-    "project_id": "disaster-a4d47",
-    "storage_bucket": "disaster-a4d47.appspot.com"
+    "project_number": "419711649930",
+    "project_id": "sanjeevani-a1a57",
+    "storage_bucket": "sanjeevani-a1a57.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:504868507999:android:5ec1ae7c51b97da05426ea",
+        "mobilesdk_app_id": "1:419711649930:android:b8b643b1fc832f9d6cc573",
         "android_client_info": {
-          "package_name": "com.example.disastermanagement"
+          "package_name": "com.example.di"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDBjDM0jPU1_DleYcQnZ7S5wGJdULuEOfc"
+          "current_key": "AIzaSyDfACeQKWWhoaaaVzYQi62EijJodst4c0k"
         }
       ],
       "services": {

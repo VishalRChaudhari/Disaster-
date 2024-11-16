@@ -1,4 +1,4 @@
-import 'package:disastermanagement/Screens/NotificationsScreen.dart';
+import 'package:disastermanagement/Screens/notifications_screen.dart';
 import 'package:disastermanagement/Screens/register_page.dart';
 import 'package:disastermanagement/Screens/map_screen.dart';
 import 'package:disastermanagement/Widgets/DisasterPage.dart';
@@ -71,7 +71,7 @@ class _HomePage extends State<HomePage> {
           if (currentIndex == 4)
             IconButton(
                 onPressed: () {
-                  FirebaseAuth.instance.signOut();
+                 FirebaseAuth.instance.signOut();
                 },
                 icon: const Icon(Icons.logout))
         ],

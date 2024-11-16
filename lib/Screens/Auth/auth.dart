@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-final _firebase = FirebaseAuth.instance;
+//final _firebase = FirebaseAuth.instance;
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -12,6 +13,8 @@ class AuthScreen extends StatefulWidget {
     return _AuthScreen();
   }
 }
+
+final _firebase = FirebaseAuth.instance;
 
 class _AuthScreen extends State<AuthScreen> {
   final _formKey = GlobalKey<FormState>();
@@ -24,7 +27,7 @@ class _AuthScreen extends State<AuthScreen> {
 
   void _onsubmit() async {
     final isValid = _formKey.currentState!.validate();
-    if (!isValid || !_isLogin ) {
+    if (!isValid || !_isLogin) {
       return;
     }
     _formKey.currentState!.save();
@@ -39,16 +42,15 @@ class _AuthScreen extends State<AuthScreen> {
             email: _enteredEmail, password: _enteredPassword);
       } else {
         final userCredentials = await _firebase.createUserWithEmailAndPassword(
-            email: _enteredEmail, password: _enteredPassword);     
-       
-        FirebaseFirestore.instance
-            .collection('users')
+            email: _enteredEmail, password: _enteredPassword);
+
+        /*await FirebaseFirestore.instance
+            .collection('Users')
             .doc(userCredentials.user!.uid)
             .set({
           'UserName': _enteredUsername,
           'Email Address': _enteredEmail,
-          
-        });
+        });*/
       }
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {}
@@ -61,7 +63,13 @@ class _AuthScreen extends State<AuthScreen> {
       setState(() {
         _isAuthenticating = false;
       });
+      
     }
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('done'),
+        ),
+      );
   }
 
   @override
@@ -73,7 +81,6 @@ class _AuthScreen extends State<AuthScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-             
               Card(
                 margin: const EdgeInsets.all(20),
                 child: SingleChildScrollView(
@@ -84,7 +91,6 @@ class _AuthScreen extends State<AuthScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          
                           TextFormField(
                             onSaved: (value) {
                               _enteredEmail = value!;
@@ -143,7 +149,7 @@ class _AuthScreen extends State<AuthScreen> {
                             const CircularProgressIndicator(),
                           if (!_isAuthenticating)
                             ElevatedButton(
-                              onPressed: _onsubmit,
+                              onPressed:_onsubmit,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Theme.of(context)
                                     .colorScheme

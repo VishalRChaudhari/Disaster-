@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disastermanagement/Screens/home.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 
@@ -38,30 +38,34 @@ class _RegisterPage extends State<RegisterPage> {
     setState(() {});
   }
 
-  Future<void> _registerDisaster() async {
-    if (_formKey.currentState!.validate()) {
-      await FirebaseFirestore.instance.collection('disasters').add(
-        {
-          'title': _titleController.text,
-          'type': _selectedDisasterType,
-          'date': _selectedDate?.toIso8601String(),
-          'location': {
-            'latitude': _currentLocation?.latitude,
-            'longitude': _currentLocation?.longitude,
-          },
-        },
-      );
+  void _onRegister() async {
+    final title = _titleController.text;
+    final lattitude = _currentLocation?.latitude;
+    final longitude = _currentLocation?.longitude;
+    final isvalid = _formKey.currentState!.validate();
 
-      // ignore: use_build_context_synchronously
-      /*ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Disaster registered successfully!')),
-      );*/
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
+    if (isvalid) {
+      _formKey.currentState!.save();
+      await FirebaseFirestore.instance.collection('Disaster').add({
+        'title': title,
+        'disaster type': _selectedDisasterType,
+        'date': _selectedDate?.toIso8601String(),
+        'location': {
+          'latitude': lattitude,
+          'longitude': longitude,
+        }
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Disaster Registerd Successfully '),
         ),
       );
     }
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const HomePage(),
+      ),
+    );
   }
 
   @override
@@ -140,7 +144,9 @@ class _RegisterPage extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () => _registerDisaster,
+                  onPressed: () {
+                    _onRegister();
+                  },
                   child: const Text('Register'),
                 ),
               ],

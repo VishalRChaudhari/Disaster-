@@ -1,3 +1,4 @@
+import 'package:disastermanagement/Screens/map_screen.dart';
 import 'package:disastermanagement/Screens/splashsceen.dart';
 import 'package:disastermanagement/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,7 +24,7 @@ final theme = ThemeData(
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,

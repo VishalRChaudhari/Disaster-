@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 //final _firebase = FirebaseAuth.instance;
 
+
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
 

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:disastermanagement/Screens/Auth/auth.dart';
+import 'package:disastermanagement/Screens/Auth/login.dart';
 import 'package:disastermanagement/Screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -43,13 +43,6 @@ class _SplashScreennState extends State<SplashScreenn> {
 Widget homeBuild = StreamBuilder(
     stream: FirebaseAuth.instance.authStateChanges(),
     builder: (context, snapshot) {
-      if (snapshot.hasError) {
-        return const Scaffold(
-          body: Center(
-            child: Text('Error loading data'),
-          ),
-        );
-      }
       if (snapshot.connectionState == ConnectionState.waiting) {
         return const Center(
           child: CircularProgressIndicator(),
@@ -58,5 +51,5 @@ Widget homeBuild = StreamBuilder(
       if (snapshot.hasData) {
         return const HomePage();
       }
-      return const AuthScreen();
+      return const Login();
     });

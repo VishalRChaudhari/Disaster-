@@ -3,9 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-//final _firebase = FirebaseAuth.instance;
-
-
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
 
@@ -34,24 +31,27 @@ class _AuthScreen extends State<AuthScreen> {
     _formKey.currentState!.save();
 
     try {
+
       if (_isLogin) {
         setState(() {
           _isAuthenticating = true;
         });
-        // ignore: unused_local_variable
-        final userCredentials = await _firebase.signInWithEmailAndPassword(
-            email: _enteredEmail, password: _enteredPassword);
-      } else {
-        final userCredentials = await _firebase.createUserWithEmailAndPassword(
+
+        await _firebase.signInWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPassword);
 
-        /*await FirebaseFirestore.instance
+      } else {
+
+        final userCredentials = await _firebase.createUserWithEmailAndPassword(
+            email: _enteredEmail, password: _enteredPassword);
+            
+        await FirebaseFirestore.instance
             .collection('Users')
             .doc(userCredentials.user!.uid)
             .set({
-          'UserName': _enteredUsername,
-          'Email Address': _enteredEmail,
-        });*/
+          'email': _enteredEmail,
+          'username': _enteredUsername,
+        });
       }
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {}
@@ -61,16 +61,16 @@ class _AuthScreen extends State<AuthScreen> {
           content: Text(error.message ?? 'Authentication Failed. '),
         ),
       );
+
       setState(() {
         _isAuthenticating = false;
       });
-      
     }
     ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('done'),
-        ),
-      );
+      SnackBar(
+        content: Text('done'),
+      ),
+    );
   }
 
   @override
@@ -150,7 +150,7 @@ class _AuthScreen extends State<AuthScreen> {
                             const CircularProgressIndicator(),
                           if (!_isAuthenticating)
                             ElevatedButton(
-                              onPressed:_onsubmit,
+                              onPressed: _onsubmit,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Theme.of(context)
                                     .colorScheme

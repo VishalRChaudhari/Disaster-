@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:disastermanagement/Screens/Auth/login.dart';
+import 'package:disastermanagement/Screens/Auth/auth.dart';
 import 'package:disastermanagement/Screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 class SplashScreenn extends StatefulWidget {
   const SplashScreenn({super.key});
   @override
+  // ignore: library_private_types_in_public_api
   _SplashScreennState createState() => _SplashScreennState();
 }
 
@@ -51,5 +52,5 @@ Widget homeBuild = StreamBuilder(
       if (snapshot.hasData) {
         return const HomePage();
       }
-      return const Login();
+      return const Auth();
     });

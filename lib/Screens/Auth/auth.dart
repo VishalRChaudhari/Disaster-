@@ -17,6 +17,7 @@ class _AuthState extends State<Auth> {
   final _enteredPassword = TextEditingController();
   final _formkey = GlobalKey<FormState>();
   var isSignin = false;
+ 
   @override
   void dispose() {
     _emailcontroller.dispose();
@@ -48,12 +49,31 @@ class _AuthState extends State<Auth> {
         'email': email,
       });
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {}
+      String errorMessage;
+      switch (e.code) {
+        case 'email-already-in-use':
+          errorMessage =
+              'This email is already in use. Please use a different email.';
+          break;
+        case 'invalid-email':
+          errorMessage =
+              'The email address is not valid. Please enter a valid email.';
+          break;
+        case 'weak-password':
+          errorMessage =
+              'Your password is too weak. Please use a stronger password.';
+          break;
+        case 'network-request-failed':
+          errorMessage = 'Network error. Please check your connection.';
+          break;
+        default:
+          errorMessage =
+              e.message ?? 'An unexpected error occurred. Please try again.';
+      }
+
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.message ?? 'Authentication Failed. '),
-        ),
+        SnackBar(content: Text(errorMessage)),
       );
     }
   }
@@ -71,11 +91,33 @@ class _AuthState extends State<Auth> {
       await _firebase.signInWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
+      String errorMessage;
+      switch (e.code) {
+        case 'user-not-found':
+          errorMessage =
+              'No user found with this email. Please check or sign up.';
+          break;
+        case 'wrong-password':
+          errorMessage = 'Incorrect password. Please try again.';
+          break;
+        case 'invalid-email':
+          errorMessage =
+              'The email address is not valid. Please enter a valid email.';
+          break;
+        case 'network-request-failed':
+          errorMessage = 'Network error. Please check your connection.';
+          break;
+        case 'too-many-requests':
+          errorMessage = 'Too many attempts. Please try again later.';
+          break;
+        default:
+          errorMessage =
+              e.message ?? 'An unexpected error occurred. Please try again.';
+      }
+
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.message ?? 'Authentication Failed. '),
-        ),
+        SnackBar(content: Text(errorMessage)),
       );
     }
   }

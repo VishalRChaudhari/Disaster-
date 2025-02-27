@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disastermanagement/Screens/about_us.dart';
+import 'package:disastermanagement/Screens/home.dart';
 import 'package:disastermanagement/Screens/refer_us.dart';
+import 'package:disastermanagement/Widgets/helpline_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -119,6 +121,13 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             children: [
               ListTile(
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    ),
+                  );
+                },
                 leading: Icon(
                   Icons.home,
                   size: 25,
@@ -131,6 +140,19 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               ListTile(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => Scaffold(
+                        appBar: AppBar(
+                          title: Text('Helplines'),
+                          elevation: 4,
+                        ),
+                        body: SingleChildScrollView(child: HelpCard()),
+                      ),
+                    ),
+                  );
+                },
                 leading: Icon(
                   Icons.phone,
                   size: 25,

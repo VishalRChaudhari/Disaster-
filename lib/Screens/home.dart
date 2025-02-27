@@ -2,7 +2,7 @@ import 'package:disastermanagement/Screens/notifications_screen.dart';
 import 'package:disastermanagement/Screens/register_page.dart';
 import 'package:disastermanagement/Screens/map_screen.dart';
 import 'package:disastermanagement/Widgets/disaster_page.dart';
-import 'package:disastermanagement/Widgets/helplineCard.dart';
+import 'package:disastermanagement/Widgets/helpline_card.dart';
 import 'package:disastermanagement/Widgets/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +16,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   var currentIndex = 0;
-  
+
   @override
   Widget build(BuildContext context) {
-    
     String title = 'Sanjeevani';
     Widget? content;
     if (currentIndex == 0) {
@@ -29,7 +28,7 @@ class _HomePage extends State<HomePage> {
       //helpline contacts list
       title = 'Location Details';
       content = const Center(
-        child: Mapscreen(),
+        child: MapScreen(),
       );
     }
     if (currentIndex == 2) {
@@ -43,7 +42,7 @@ class _HomePage extends State<HomePage> {
       //helpline contacts list
       title = 'Helpline Contact ';
       content = const Center(
-        child: HelpCard(),
+        child: SingleChildScrollView(child: HelpCard()),
       );
     }
     if (currentIndex == 4) {
@@ -68,12 +67,7 @@ class _HomePage extends State<HomePage> {
               },
               icon: const Icon(Icons.notifications_outlined),
             ),
-          if (currentIndex == 4)
-            IconButton(
-                onPressed: () {
-                 FirebaseAuth.instance.signOut();
-                },
-                icon: const Icon(Icons.logout))
+         
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -108,7 +102,7 @@ class _HomePage extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.contact_emergency,
+              Icons.phone,
               color: Color.fromARGB(255, 1, 57, 3),
             ),
             label: 'Helpline',

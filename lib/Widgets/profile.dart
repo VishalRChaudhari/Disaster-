@@ -79,7 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           children: [
                             //avatar
                             CircleAvatar(
-                              radius: 50,
+                              radius: 40,
                               backgroundColor: Colors.blueAccent,
                               child: Text(
                                 userData!['name'] != null &&
@@ -87,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ? userData!['name'][0].toUpperCase()
                                     : '?',
                                 style: const TextStyle(
-                                  fontSize: 40,
+                                  fontSize: 35,
                                   color: Colors.white,
                                 ),
                               ),
@@ -102,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Text(
                                   ' ${userData!['name'] ?? 'N/A'}',
                                   style: const TextStyle(
-                                    fontSize: 25,
+                                    fontSize: 20,
                                   ),
                                 ),
                                 Center(

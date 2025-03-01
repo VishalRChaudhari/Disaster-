@@ -4,7 +4,7 @@ import 'package:disastermanagement/Screens/map_screen.dart';
 import 'package:disastermanagement/Widgets/disaster_page.dart';
 import 'package:disastermanagement/Widgets/helpline_card.dart';
 import 'package:disastermanagement/Widgets/profile.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -67,7 +67,6 @@ class _HomePage extends State<HomePage> {
               },
               icon: const Icon(Icons.notifications_outlined),
             ),
-         
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

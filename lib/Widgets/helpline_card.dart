@@ -1,4 +1,5 @@
 import 'package:disastermanagement/Models/helpline.dart';
+import 'package:disastermanagement/Widgets/helplinecard.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,10 +13,12 @@ class HelpCard extends StatefulWidget {
 }
 
 class _HelpCard extends State<HelpCard> {
+  final TextEditingController searchcontroller = TextEditingController();
+  List<Contacts> filteredcontacts = [];
   @override
   Widget build(BuildContext context) {
-    _launchUrl(String url) async {
-      final Uri uri = Uri.parse(url);
+    void _launchUrl(String url) async {
+      final Uri uri = Uri.parse(url); 
       if (await canLaunchUrl(uri)) {
         await launchUrl(
           uri,
@@ -35,63 +38,64 @@ class _HelpCard extends State<HelpCard> {
       }
     }
 
+    void searchedHelplines(String keyword) {
+      for (final contacts in emergencyContacts) {
+        if (keyword == contacts.contactName) {
+          filteredcontacts.add(contacts);
+        }
+        for (final contact in filteredcontacts) {
+          Helplinecard(
+            contactname: contact.contactName,
+            number: contact.contactNumber.toString(),
+            url: contact.url,
+            phoneCall: (number) {
+              _makePhoneCall(contact.contactNumber.toString());
+            },
+            urlLaunch: (url) {
+              _launchUrl(contact.url);
+            },
+          );
+        }
+      }
+    }
+
     return Padding(
       padding: const EdgeInsets.all(5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          for (final contacts in emergencyContacts)
-            SizedBox(
-              width: double.infinity,
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Contact Name
-                      Text(
-                        contacts.contactName,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 10),
-                      // Number and URL Row
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  contacts.contactNumber.toString(),
-                                  style: TextStyle(fontSize: 14),
-                                ),
-                                const SizedBox(height: 5),
-                                GestureDetector(
-                                  child: Text(
-                                    contacts.url,
-                                    style:
-                                        TextStyle(color: Colors.blue.shade400),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  ),
-                                  onTap: () => _launchUrl(contacts.url),
-                                ),
-                              ],
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () => _makePhoneCall(
-                                contacts.contactNumber.toString()),
-                            icon: Icon(Icons.phone, size: 20),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+          SizedBox(
+            height: 10,
+          ),
+          //Search bar
+          TextField(
+            
+            controller: searchcontroller,
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.all(12),
+              hintText: 'Search...',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
                 ),
               ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          
+          for (final contacts in emergencyContacts)
+            Helplinecard(
+              contactname: contacts.contactName,
+              number: contacts.contactNumber.toString(),
+              url: contacts.url,
+              phoneCall: (number) {
+                _makePhoneCall(contacts.contactNumber.toString());
+              },
+              urlLaunch: (url) {
+                _launchUrl(contacts.url);
+              },
             ),
         ],
       ),

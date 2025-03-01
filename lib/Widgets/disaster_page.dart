@@ -3,6 +3,7 @@ import 'package:disastermanagement/Widgets/news.dart';
 import 'package:disastermanagement/Widgets/weatherCard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DisasterPage extends StatefulWidget {
   const DisasterPage({super.key});
@@ -68,29 +69,23 @@ class _DisasterPage extends State<DisasterPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //search location
-          /*const Padding(
-            padding: EdgeInsets.only(
-              top: 10,
-            ),
-            child: TextField(
-              decoration: InputDecoration(
-                filled: true,
-                enabled: true,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(25),
-                  ),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(25),
-                  ),
-                ),
-                label: Text('Search City'),
-                contentPadding: EdgeInsets.all(15),
+          TextField(
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25),
+                borderSide: BorderSide(color: Colors.grey.shade400),
               ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25),
+                borderSide: const BorderSide(color: Colors.blue, width: 2),
+              ),
+              prefixIcon: const Icon(Icons.search, color: Colors.grey),
+              hintText: 'Search City',
+              contentPadding: const EdgeInsets.all(15),
             ),
-          ),*/
+          ),
           //const SearchCity(),
           const SizedBox(
             height: 10,
@@ -99,26 +94,41 @@ class _DisasterPage extends State<DisasterPage> {
 
           SizedBox(
             width: double.infinity,
-            height: 110,
+            height: 120,
             child: Card(
-              elevation: 3,
+              elevation: 1,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              color: Theme.of(context).colorScheme.secondaryContainer,
               child: Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
                   children: [
-                    const Text(
-                      'Hello...',
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      child: const Icon(FontAwesomeIcons.user,
+                          size: 30, color: Colors.white),
                     ),
-                    Text(
-                      '${userData?['name'] ?? 'N/A'}',
-                      style: const TextStyle(
-                        fontSize: 26,
-                      ),
+                    const SizedBox(width: 15),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Hello...',
+                          style: TextStyle(fontSize: 16, color: Colors.black54),
+                        ),
+                        Text(
+                          userData?['name'] ?? 'Guest',
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -136,7 +146,7 @@ class _DisasterPage extends State<DisasterPage> {
             height: 10,
           ),
           const Text(
-            ' News',
+            'Latest News',
             style: TextStyle(
               fontSize: 30,
             ),

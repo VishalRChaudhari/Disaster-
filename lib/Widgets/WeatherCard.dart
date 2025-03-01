@@ -1,5 +1,6 @@
 import 'package:disastermanagement/sec.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather/weather.dart';
 
 class WeatherCard extends StatefulWidget {
@@ -31,54 +32,88 @@ class _WeatherCardState extends State<WeatherCard> {
       height: 150,
       width: double.infinity,
       child: Card(
-        elevation: 2,
+        elevation: 1,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+    
+       color : Theme.of(context).colorScheme.secondaryContainer,
         child: Padding(
-          padding: const EdgeInsets.only(left: 20, top: 10),
+          padding: const EdgeInsets.all(15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //city name
               Text(
                 _weather == null ? 'Loading...' : "${_weather?.areaName}",
                 style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 28,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 26,
+                  color: Colors.black87,
                 ),
               ),
-              const SizedBox(
-                height: 13,
-              ),
-              //sky
-
-              //temperature
+              const SizedBox(height: 10),
               Row(
                 children: [
-                  const Text('Temperature : '),
+                  const Icon(FontAwesomeIcons.temperatureHigh,
+                      size: 18, color: Colors.orange),
+                  const SizedBox(width: 8),
                   Text(
                     _weather == null
                         ? ' - °C '
                         : '${_weather?.temperature?.celsius?.toStringAsFixed(1)}° C',
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ],
               ),
-
-              //humidity
+              const SizedBox(height: 8),
               Row(
                 children: [
-                  const Text(
-                    'Humidity : ',
-                  ),
-                  Text(_weather == null
-                        ? '-' :
-                    "${_weather?.humidity}" ),
+                  // ignore: deprecated_member_use
+                  const Icon(FontAwesomeIcons.tint,
+                      size: 18, color: Colors.blue),
+                  const SizedBox(width: 8),
+                  Text(_weather == null ? '-' : "${_weather?.humidity}%",
+                      style: const TextStyle(fontSize: 18)),
                 ],
-              )
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

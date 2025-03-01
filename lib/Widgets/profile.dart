@@ -3,6 +3,7 @@ import 'package:disastermanagement/Screens/about_us.dart';
 import 'package:disastermanagement/Screens/home.dart';
 import 'package:disastermanagement/Screens/refer_us.dart';
 import 'package:disastermanagement/Widgets/helpline_card.dart';
+import 'package:disastermanagement/data/profile_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -20,11 +21,22 @@ class _ProfilePageState extends State<ProfilePage> {
   // User data
   Map<String, dynamic>? userData;
   bool isLoading = true;
+  String _name = "Loading...";
+  String _email = "Loading...";
 
   @override
   void initState() {
     super.initState();
     fetchUserProfile();
+    _loadProfile();
+  }
+
+  Future<void> _loadProfile() async {
+    var profileData = await ProfileData.getProfile();
+    setState(() {
+      _name = profileData['name'] ?? "No Name";
+      _email = profileData['email'] ?? "No Email";
+    });
   }
 
   Future<void> fetchUserProfile() async {
@@ -67,7 +79,9 @@ class _ProfilePageState extends State<ProfilePage> {
     return Column(
       children: [
         isLoading
-            ? const Center(child: CircularProgressIndicator())
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
             : userData == null
                 ? const Center(child: Text('No profile data available.'))
                 : userData == null
@@ -100,14 +114,14 @@ class _ProfilePageState extends State<ProfilePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  ' ${userData!['name'] ?? 'N/A'}',
+                                  ' ${userData!['name'] ?? _name}',
                                   style: const TextStyle(
                                     fontSize: 20,
                                   ),
                                 ),
                                 Center(
                                   child: Text(
-                                    ' ${userData!['email'] ?? 'N/A'}',
+                                    ' ${userData!['email'] ?? _email}',
                                     style: const TextStyle(fontSize: 15),
                                   ),
                                 ),

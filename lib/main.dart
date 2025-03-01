@@ -11,11 +11,16 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (context) => LocationProvider(),
-    )
-  ], child: const MyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => LocationProvider(),
+        )
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 const Color maincolor = Color(0xFFB2BEB5);
@@ -24,6 +29,17 @@ final theme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: maincolor),
   brightness: Brightness.light,
   textTheme: GoogleFonts.poppinsTextTheme(),
+
+  appBarTheme: AppBarTheme(
+    backgroundColor: maincolor,
+    foregroundColor: Colors.white,
+    elevation: 4,
+    titleTextStyle: GoogleFonts.poppins(
+      fontSize: 20,
+      color: Colors.black,
+    ),
+  ),
+ 
 );
 
 class MyApp extends StatelessWidget {

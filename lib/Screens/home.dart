@@ -56,7 +56,7 @@ class _HomePage extends State<HomePage> {
     }
 
     return Scaffold(
-      backgroundColor : Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: Text(title),
         elevation: 50,
@@ -68,13 +68,15 @@ class _HomePage extends State<HomePage> {
                   builder: (context) => const Notificationsscreen(),
                 ));
               },
-              icon: const Icon(Icons.notifications_outlined),
+              icon: const Icon(Icons.notifications),
             ),
         ],
       ),
+      body: content,
 
+      
       bottomNavigationBar: BottomNavigationBar(
-        elevation: 10,
+        iconSize: 20,
         fixedColor: Theme.of(context).colorScheme.secondary,
         onTap: (value) {
           setState(() {
@@ -120,7 +122,6 @@ class _HomePage extends State<HomePage> {
           ),
         ],
       ),
-      body: content,
     );
   }
 }

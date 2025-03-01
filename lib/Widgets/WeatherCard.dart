@@ -29,10 +29,10 @@ class _WeatherCardState extends State<WeatherCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      
       height: 150,
       width: double.infinity,
-      child: Card(
-       
+      child: Card(  
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),

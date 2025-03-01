@@ -1,0 +1,2 @@
+C:/Users/VISHAL/OneDrive/Desktop/flutter_projects/disastermanagement/android/app/.cxx/Debug/3z2i5o4f/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/VISHAL/OneDrive/Desktop/flutter_projects/disastermanagement/android/app/.cxx/Debug/3z2i5o4f/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -1,3 +1,4 @@
+import 'package:disastermanagement/Widgets/search.dart';
 import 'package:disastermanagement/sec.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -90,61 +91,50 @@ class _MapScreenState extends State<MapScreen> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            controller: _searchController,
-            decoration: InputDecoration(
-              hintText: "Enter city name",
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () {
-                  if (_searchController.text.isNotEmpty) {
-                    _searchCity(_searchController.text);
-                  }
-                },
-              ),
-              border: const OutlineInputBorder(),
-            ),
-          ),
-        ),
+            padding: const EdgeInsets.all(8.0),
+            child: Searchbar(searchtext: 'Enter City Name')),
         Expanded(
           child: Stack(
             children: [
-              FlutterMap(
-                mapController: _mapController,
-                options: MapOptions(
-                  initialCenter: _currentCenter,
-                  initialZoom: _currentZoom,
-                  onTap: (tapPosition, LatLng point) {
-                    setState(() {
-                      _markerPosition = point; // Update marker position on tap
-                    });
-                  },
-                ),
-                children: [
-                  TileLayer(
-                    urlTemplate:
-                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                    subdomains: const ['a', 'b', 'c'],
+              Padding(
+                padding: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
+                child: FlutterMap(
+                  mapController: _mapController,
+                  options: MapOptions(
+                    initialCenter: _currentCenter,
+                    initialZoom: _currentZoom,
+                    onTap: (tapPosition, LatLng point) {
+                      setState(() {
+                        _markerPosition =
+                            point; // Update marker position on tap
+                      });
+                    },
                   ),
-                  MarkerLayer(
-                    markers: [
-                      Marker(
-                        point: _markerPosition,
-                        width: 80.0,
-                        height: 80.0,
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: const Icon(
-                            Icons.location_pin,
-                            color: Colors.red,
-                            size: 50,
+                  children: [
+                    TileLayer(
+                      urlTemplate:
+                          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                      subdomains: const ['a', 'b', 'c'],
+                    ),
+                    MarkerLayer(
+                      markers: [
+                        Marker(
+                          point: _markerPosition,
+                          width: 80.0,
+                          height: 80.0,
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: const Icon(
+                              Icons.location_pin,
+                              color: Colors.red,
+                              size: 50,
+                            ),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
               // Confirm Button
               Positioned(

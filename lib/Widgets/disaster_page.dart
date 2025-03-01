@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disastermanagement/Widgets/news.dart';
+import 'package:disastermanagement/Widgets/search.dart';
 import 'package:disastermanagement/Widgets/weatherCard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -69,24 +70,10 @@ class _DisasterPage extends State<DisasterPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //search location
-          TextField(
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(25),
-                borderSide: BorderSide(color: Colors.grey.shade400),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(25),
-                borderSide: const BorderSide(color: Colors.blue, width: 2),
-              ),
-              prefixIcon: const Icon(Icons.search, color: Colors.grey),
-              hintText: 'Search City',
-              contentPadding: const EdgeInsets.all(15),
-            ),
+          Searchbar(
+            searchtext: 'Search City',
           ),
-          //const SearchCity(),
+
           const SizedBox(
             height: 10,
           ),
@@ -96,7 +83,6 @@ class _DisasterPage extends State<DisasterPage> {
             width: double.infinity,
             height: 120,
             child: Card(
-              elevation: 1,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),

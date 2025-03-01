@@ -2,10 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disastermanagement/Screens/about_us.dart';
 import 'package:disastermanagement/Screens/home.dart';
 import 'package:disastermanagement/Screens/refer_us.dart';
-import 'package:disastermanagement/Widgets/helpline_card.dart';
+import 'package:disastermanagement/Screens/helpline.dart';
 import 'package:disastermanagement/data/profile_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -94,7 +95,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             //avatar
                             CircleAvatar(
                               radius: 40,
-                              backgroundColor: Colors.blueAccent,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.primary,
                               child: Text(
                                 userData!['name'] != null &&
                                         userData!['name'].isNotEmpty
@@ -106,6 +108,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ),
+
                             const SizedBox(
                               width: 15,
                             ),
@@ -134,6 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
           padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
           child: Column(
             children: [
+              const SizedBox(height: 10),
               ListTile(
                 onTap: () {
                   Navigator.of(context).pushReplacement(
@@ -144,14 +148,21 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
                 leading: Icon(
                   Icons.home,
-                  size: 25,
+                  size: 20,
                 ),
                 title: Text(
                   'Home',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
+              ),
+              Divider(
+                height: 0.5,
+                indent: 15,
+                endIndent: 15,
+                color: Theme.of(context).colorScheme.secondary,
+                thickness: 0.5,
               ),
               ListTile(
                 onTap: () {
@@ -169,26 +180,40 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
                 leading: Icon(
                   Icons.phone,
-                  size: 25,
+                  size: 20,
                 ),
                 title: Text(
                   'Helplines',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
+              ),
+              Divider(
+                height: 0.5,
+                indent: 15,
+                endIndent: 15,
+                color: Theme.of(context).colorScheme.secondary,
+                thickness: 0.5,
               ),
               ListTile(
                 leading: Icon(
                   Icons.rule,
-                  size: 25,
+                  size: 20,
                 ),
                 title: Text(
                   "Dos & Don'ts",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
+              ),
+              Divider(
+                height: 0.5,
+                indent: 15,
+                endIndent: 15,
+                color: Theme.of(context).colorScheme.secondary,
+                thickness: 0.5,
               ),
               ListTile(
                 onTap: () {
@@ -200,14 +225,21 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
                 leading: Icon(
                   Icons.share,
-                  size: 25,
+                  size: 20,
                 ),
                 title: Text(
                   'Refer Us',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
+              ),
+              Divider(
+                height: 0.5,
+                indent: 15,
+                endIndent: 15,
+                color: Theme.of(context).colorScheme.secondary,
+                thickness: 0.5,
               ),
               ListTile(
                 onTap: () {
@@ -219,29 +251,43 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
                 leading: Icon(
                   Icons.info_outline,
-                  size: 25,
+                  size: 20,
                 ),
                 title: Text(
                   'About Us',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
+              ),
+              Divider(
+                height: 0.5,
+                indent: 15,
+                endIndent: 15,
+                color: Theme.of(context).colorScheme.secondary,
+                thickness: 0.5,
               ),
               ListTile(
                 leading: Icon(
                   Icons.logout,
-                  size: 25,
+                  size: 20,
                 ),
                 title: Text(
                   'Log Out',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
                 onTap: () {
                   FirebaseAuth.instance.signOut();
                 },
+              ),
+              Divider(
+                height: 0.5,
+                indent: 15,
+                endIndent: 15,
+                color: Theme.of(context).colorScheme.secondary,
+                thickness: 0.5,
               ),
             ],
           ),

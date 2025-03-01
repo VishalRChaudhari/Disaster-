@@ -1,5 +1,6 @@
 import 'package:disastermanagement/Models/helpline.dart';
 import 'package:disastermanagement/Widgets/helplinecard.dart';
+import 'package:disastermanagement/Widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,7 +19,7 @@ class _HelpCard extends State<HelpCard> {
   @override
   Widget build(BuildContext context) {
     void _launchUrl(String url) async {
-      final Uri uri = Uri.parse(url); 
+      final Uri uri = Uri.parse(url);
       if (await canLaunchUrl(uri)) {
         await launchUrl(
           uri,
@@ -68,23 +69,13 @@ class _HelpCard extends State<HelpCard> {
             height: 10,
           ),
           //Search bar
-          TextField(
-            
-            controller: searchcontroller,
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(12),
-              hintText: 'Search...',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ),
-            ),
+          Searchbar(
+            searchtext: 'Search...',
           ),
           SizedBox(
             height: 10,
           ),
-          
+
           for (final contacts in emergencyContacts)
             Helplinecard(
               contactname: contacts.contactName,

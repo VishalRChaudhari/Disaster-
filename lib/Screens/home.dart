@@ -1,9 +1,9 @@
 import 'package:disastermanagement/Screens/notifications_screen.dart';
-import 'package:disastermanagement/Screens/register_page.dart';
+import 'package:disastermanagement/Screens/disaster_register.dart';
 import 'package:disastermanagement/Screens/map_screen.dart';
 import 'package:disastermanagement/Widgets/disaster_page.dart';
-import 'package:disastermanagement/Widgets/helpline_card.dart';
-import 'package:disastermanagement/Widgets/profile.dart';
+import 'package:disastermanagement/Screens/helpline.dart';
+import 'package:disastermanagement/Screens/profile.dart';
 
 import 'package:flutter/material.dart';
 
@@ -42,7 +42,9 @@ class _HomePage extends State<HomePage> {
       //helpline contacts list
       title = 'Helpline Contact ';
       content = const Center(
-        child: SingleChildScrollView(child: HelpCard()),
+        child: SingleChildScrollView(
+          child: HelpCard(),
+        ),
       );
     }
     if (currentIndex == 4) {
@@ -54,6 +56,7 @@ class _HomePage extends State<HomePage> {
     }
 
     return Scaffold(
+      backgroundColor : Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: Text(title),
         elevation: 50,
@@ -69,8 +72,10 @@ class _HomePage extends State<HomePage> {
             ),
         ],
       ),
+
       bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Colors.black,
+        elevation: 10,
+        fixedColor: Theme.of(context).colorScheme.secondary,
         onTap: (value) {
           setState(() {
             currentIndex = value;

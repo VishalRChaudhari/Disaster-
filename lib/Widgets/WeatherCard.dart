@@ -32,7 +32,7 @@ class _WeatherCardState extends State<WeatherCard> {
       height: 150,
       width: double.infinity,
       child: Card(
-        elevation: 1,
+       
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),

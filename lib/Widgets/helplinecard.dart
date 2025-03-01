@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-
 class Helplinecard extends StatelessWidget {
-  Helplinecard(
+  const Helplinecard(
       {super.key,
       required this.contactname,
       required this.number,
@@ -10,16 +9,18 @@ class Helplinecard extends StatelessWidget {
       required this.phoneCall,
       required this.urlLaunch});
 
-  String contactname;
-  String url;
-  String number;
-   Function(String number) phoneCall;
-   Function(String url) urlLaunch;
+  final String contactname;
+  final String url;
+  final String number;
+  final Function(String number) phoneCall;
+  final Function(String url) urlLaunch;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: Card(
+        color: Theme.of(context).colorScheme.secondaryContainer,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -47,7 +48,7 @@ class Helplinecard extends StatelessWidget {
                         GestureDetector(
                           child: Text(
                             url,
-                            style: TextStyle(color: Colors.blue.shade400),
+                            style: TextStyle(color: Colors.blueAccent.shade400),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),

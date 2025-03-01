@@ -61,7 +61,7 @@ class _HomePage extends State<HomePage> {
         title: Text(title),
         elevation: 50,
         actions: [
-          if (currentIndex == 0)
+          if (currentIndex == 0 || currentIndex == 4 || currentIndex == 3)
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(

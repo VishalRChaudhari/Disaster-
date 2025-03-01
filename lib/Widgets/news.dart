@@ -22,8 +22,8 @@ class NewsExpansionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.only(left: 8, top: 10, bottom: 10, right: 8),
-      color : Theme.of(context).colorScheme.secondaryContainer,
+      margin: const EdgeInsets.only(top: 8, bottom: 8),
+      color: Theme.of(context).colorScheme.secondaryContainer,
       child: ExpansionTile(
         title: Text(newsItem.title),
         subtitle: Text(newsItem.date),
